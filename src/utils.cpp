@@ -20,3 +20,17 @@ void uts::loadConfig(const std::string &configList, libconfig::Config &cfg)
         exit(EXIT_FAILURE);
     }
 }
+
+void uts::fillVectorNumbers(const std::string &fileName, std::vector<int> &nums)
+{
+    std::ifstream file(fileName);
+    std::string line;
+    if (file.is_open())
+    {
+        while ( getline (file,line) )
+        {
+            nums.push_back(std::stoi(line));
+        }
+        file.close();
+    }
+}

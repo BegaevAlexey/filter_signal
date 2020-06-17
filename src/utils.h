@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include <libconfig.h++>
+#include <vector>
+#include <fstream>
 
 namespace uts
 {
@@ -53,5 +55,13 @@ namespace uts
             return defParam;
         }
     }
+
+    /*!
+     * @brief Загрузка значений из файла
+     * @param fileName[in] Название файла
+     * @param nums[out] Вектор для заполнения
+     */
+    void fillVectorNumbers(const std::string &fileName, std::vector<int> &nums);
+
 }// namespace uts
 #endif //FILTER_SIGNAL_UTILS_H
