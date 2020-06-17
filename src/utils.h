@@ -63,5 +63,12 @@ namespace uts
      */
     void fillVectorNumbers(const std::string &fileName, std::vector<int> &nums);
 
+   /*!
+    * @brief Запись значений в файл
+    * @param fileName[in] Название файла
+    * @param nums[in] Вектор с числами
+    */
+    void writeNum(const std::string &fileName, const std::vector<int> &nums);
+
 }// namespace uts
 #endif //FILTER_SIGNAL_UTILS_H

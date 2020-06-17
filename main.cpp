@@ -16,13 +16,33 @@ int main(int argc, char **argv)
     uts::loadConfig(argv[1], cfg);
 
     /// read numbers from file
-    const auto readFileName = uts::getCfgPrm<std::string>(cfg, "cfg");
-    std::vector<int> inputNumber;
-    uts::fillVectorNumbers(readFileName, inputNumber);
+    const auto readFileName = uts::getCfgPrm<std::string>(cfg, "src");
+    std::vector<int> inNums;
+    uts::fillVectorNumbers(readFileName, inNums);
 
+    std::vector<int> outNums;
+    for(int i=0; i<inNums.size(); i += 10)
+    {
+        auto first = inNums.begin() + i;
+        auto last = first;
+        if(i+10 < inNums.size())
+        {
+            last  = first + 10;
+        }
+        else
+        {
+            last = inNums.end();
+        }
+        std::vector<int> temp(first, last);
 
+        auto tempFilter = uts::makeFilter(temp);
 
+        outNums.insert(outNums.end(), tempFilter.begin(), tempFilter.end());
+    }
 
+    /// write result
+    auto writeFile = uts::getCfgPrmDef<std::string>(cfg, "output", "result.txt");
+    uts::writeNum(writeFile, outNums);
 
     std::cout << "\n\t***END PROGRAM***" << std::endl;
     return 0;

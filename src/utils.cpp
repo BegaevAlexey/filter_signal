@@ -34,3 +34,16 @@ void uts::fillVectorNumbers(const std::string &fileName, std::vector<int> &nums)
         file.close();
     }
 }
+
+void uts::writeNum(const std::string& fileName, const std::vector<int>& nums)
+{
+    std::ofstream file ("example.txt");
+    if (file.is_open())
+    {
+        for(auto num: nums)
+        {
+            file << (std::to_string(num) + '\n');
+        }
+        file.close();
+    }
+}
