@@ -18,8 +18,8 @@ int main(int argc, char **argv)
     /// read numbers from file
     const auto readFileName = uts::getCfgPrm<std::string>(cfg, "src");
     std::vector<int> inNums;
-    uts::fillVectorNumbers(readFileName, inNums);
-
+    uts::fillVectorNumbers (readFileName, inNums);
+    std::cout << "[INFO] In file: " << inNums.size() << std::endl;
     std::vector<int> outNums;
     for(int i=0; i<inNums.size(); i += 10)
     {
@@ -35,13 +35,15 @@ int main(int argc, char **argv)
         }
         std::vector<int> temp(first, last);
 
+
         auto tempFilter = uts::makeFilter(temp);
 
         outNums.insert(outNums.end(), tempFilter.begin(), tempFilter.end());
     }
 
     /// write result
-    auto writeFile = uts::getCfgPrmDef<std::string>(cfg, "output", "result.txt");
+    std::cout << "[INFO] OUt file: " << outNums.size() << std::endl;
+    auto writeFile = uts::getCfgPrmDef<std::string>(cfg, "res", "result.txt");
     uts::writeNum(writeFile, outNums);
 
     std::cout << "\n\t***END PROGRAM***" << std::endl;

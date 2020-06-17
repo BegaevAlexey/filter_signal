@@ -6,6 +6,7 @@
 #include <libconfig.h++>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 
 namespace uts
 {
@@ -69,6 +70,28 @@ namespace uts
     * @param nums[in] Вектор с числами
     */
     void writeNum(const std::string &fileName, const std::vector<int> &nums);
+
+    /*!
+     * @brief Фильтрация входных значений
+     * @param nums[in] Входные данные для фильтрации
+     * @param threshold[in] Порог фильтрации
+     * @return Отрфильтрованный набор чисел
+     */
+    template<class T>
+    std::vector<T> makeFilter(const std::vector<T> &nums, float threshold = 0.3)
+    {
+        std::vector<T> filter = nums;
+        std::sort(filter.begin(), filter.end());
+        T median = filter[filter.size()/2];
+        T low    = median - median * threshold;
+        T high   = median + median * threshold;
+        filter.erase(std::remove_if(filter.begin(), filter.end(), [&](T num)
+        {
+            return (low > num) && (num > high);
+        }), filter.end());
+
+        return filter;
+    }
 
 }// namespace uts
 #endif //FILTER_SIGNAL_UTILS_H

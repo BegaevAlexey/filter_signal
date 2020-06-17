@@ -37,7 +37,7 @@ void uts::fillVectorNumbers(const std::string &fileName, std::vector<int> &nums)
 
 void uts::writeNum(const std::string& fileName, const std::vector<int>& nums)
 {
-    std::ofstream file ("example.txt");
+    std::ofstream file (fileName);
     if (file.is_open())
     {
         for(auto num: nums)
